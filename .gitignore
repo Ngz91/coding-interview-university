@@ -18,3 +18,8 @@ Thumbs.db
 
 # Sublime Files
 .sublime
+
+# executables
+*
+!*.cpp
+!*.h

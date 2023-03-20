@@ -42,6 +42,52 @@ public:
     size++;
   }
 
+  void insert(int index, T item) {
+    if (index == capacity) {
+      push(item);
+    } else {
+      capacity *= 2;
+      T *temp = new T[capacity];
+      for (int i = 0; i < size; i++) {
+        if (i >= index) {
+          temp[i + 1] = arr[i];
+        } else {
+          temp[i] = arr[i];
+        }
+      }
+
+      temp[index] = item;
+      arr = temp;
+      size++;
+    }
+  }
+
+  void prepend(int item) {
+    if (size == 0) {
+      push(item);
+    } else {
+      capacity *= 2;
+      T *temp = new T[capacity];
+      temp[0] = item;
+      for (int i = 0; i < size; i++) {
+        temp[i + 1] = arr[i];
+      }
+
+      arr = temp;
+      size++;
+    }
+  }
+
+  void pop() {
+    capacity--;
+    size--;
+  }
+  
+  //TODO
+  void del_at(int index) {
+    cout << "Deleting " << arr[index] << " from array" << endl;
+  }
+
   void print_all() {
     for (int i = 0; i < size; i++) {
       cout << arr[i] << endl;
@@ -61,4 +107,20 @@ int main() {
 
   cout << v.at(2) << endl;
   v.print_all();
+
+  v.insert(1, 66);
+
+  cout << endl;
+  v.print_all();
+
+  cout << endl;
+  v.prepend(69);
+  v.print_all();
+  
+  cout << endl;
+  v.pop();
+  v.print_all();
+
+  cout << endl;
+  v.del_at(2);
 }
