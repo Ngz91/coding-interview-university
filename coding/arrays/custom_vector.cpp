@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <ostream>
 #include <stdexcept>
 
 using namespace std;
@@ -82,10 +83,44 @@ public:
     capacity--;
     size--;
   }
-  
-  //TODO
+
   void del_at(int index) {
-    cout << "Deleting " << arr[index] << " from array" << endl;
+    T *temp = new T[capacity];
+    for (int i = 0; i < size; i++) {
+      if (i != index) {
+        temp[i] = arr[i];
+      } else {
+        temp[index] = arr[i + 1];
+      }
+    }
+
+    arr = temp;
+    pop();
+  }
+
+  void remove(T item) {
+    int count = 0;
+    T *temp = new T[capacity];
+    for (int i = 0; i < size; i++) {
+      if (arr[i] == item && i != size) {
+        temp[i] = arr[i + 1];
+        count += 1;
+      } else {
+        temp[i] = arr[i];
+      }
+    }
+    arr = temp;
+    capacity = capacity - count;
+    size = size - count;
+  }
+
+  int find(T item) {
+    for (int i = 0; i < size; i++) {
+      if (arr[i] == item) {
+        return i;
+      }
+    }
+    return -1;
   }
 
   void print_all() {
@@ -116,11 +151,20 @@ int main() {
   cout << endl;
   v.prepend(69);
   v.print_all();
-  
+
   cout << endl;
   v.pop();
   v.print_all();
 
   cout << endl;
   v.del_at(2);
+  v.print_all();
+
+  cout << endl;
+  v.push(33);
+  v.remove(33);
+  v.print_all();
+
+  v.find(78);
+  v.find(545);
 }
