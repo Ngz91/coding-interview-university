@@ -102,7 +102,7 @@ public:
     int count = 0;
     T *temp = new T[capacity];
     for (int i = 0; i < size; i++) {
-      if (arr[i] == item && i != size) {
+      if (arr[i] == item) {
         temp[i] = arr[i + 1];
         count += 1;
       } else {
