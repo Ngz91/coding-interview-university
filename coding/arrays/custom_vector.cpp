@@ -10,6 +10,14 @@ template <typename T> class CustomVector {
   int size;
   int capacity;
 
+  void resize() {
+    if (capacity >= (size / 4)) {
+      capacity /= 2;
+    } else {
+      capacity *= 2;
+    }
+  }
+
 public:
   CustomVector() : arr(new T[1]), size(0), capacity(1) {}
   ~CustomVector() { delete[] arr; }
