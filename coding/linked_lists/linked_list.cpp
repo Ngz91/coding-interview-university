@@ -8,6 +8,8 @@ struct Node {
   Node *next;
 };
 
+// Only int values to keep it simple. For a multiple values types LinkedList use
+// templates.
 class LinkedList {
   Node *head;
   int size;
@@ -61,6 +63,27 @@ public:
     }
   }
 
+  void push_back(int value) {
+    Node *n = new Node();
+    n->value = value;
+    n->next = nullptr;
+
+    if (head == nullptr) {
+      head = n;
+      size++;
+      return;
+    }
+
+    Node *current;
+    for (current = head; current != nullptr; current = current->next) {
+      if (current->next == nullptr) {
+        current->next = n;
+        size++;
+        return;
+      }
+    }
+  }
+
   void print_ll() {
     Node *tmp = head;
     while (tmp != nullptr) {
@@ -87,5 +110,9 @@ int main() {
   cout << "Size: " << linkL.get_size() << endl;
 
   linkL.pop_front();
+  linkL.print_ll();
+
+  linkL.push_back(2);
+  cout << endl;
   linkL.print_ll();
 }
