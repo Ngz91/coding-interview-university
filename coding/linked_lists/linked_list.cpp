@@ -1,4 +1,3 @@
-#include <bits/stdc++.h>
 #include <iostream>
 
 using namespace std;
@@ -43,15 +42,15 @@ public:
   void push_front(int value) {
     Node *n = new Node();
     n->value = value;
-    if (head != nullptr) {
-      n->next = head;
-      head = n;
-      size++;
-    } else {
+    if (head == nullptr) {
       head = n;
       head->next = nullptr;
       size++;
+      return;
     }
+    n->next = head;
+    head = n;
+    size++;
   }
 
   void pop_front() {
