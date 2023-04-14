@@ -37,13 +37,36 @@ public:
     return 0;
   }
 
-  // TODO
-  void add_node() {}
+  void push_front(int value) {
+    Node *n = new Node();
+    n->value = value;
+    if (head != nullptr) {
+      n->next = head;
+      head = n;
+      size++;
+    } else {
+      head = n;
+      head->next = nullptr;
+      size++;
+    }
+  }
+
+  void print_ll() {
+    while (head != nullptr) {
+      std::cout << head->value << std::endl;
+      head = head->next;
+    }
+  }
 };
 
 int main() {
   LinkedList linkL;
   linkL.get_size();
   linkL.is_empty();
+  linkL.push_front(1);
+  linkL.push_front(3);
+  linkL.push_front(5);
+  linkL.push_front(7);
   linkL.value_at(2);
+  linkL.print_ll();
 }
