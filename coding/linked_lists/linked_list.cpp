@@ -83,6 +83,25 @@ public:
     }
   }
 
+  void pop_back() {
+    if (head == nullptr) {
+      return;
+    } else if (size == 1) {
+      delete head;
+      Node *head = new Node();
+      head->next = nullptr;
+      return;
+    }
+
+    Node *current;
+    for (current = head; current != nullptr; current = current->next) {
+      if (current->next->next == nullptr) {
+        current->next = nullptr;
+        return;
+      }
+    }
+  }
+
   void print_ll() {
     Node *tmp = head;
     while (tmp != nullptr) {
@@ -112,6 +131,10 @@ int main() {
   linkL.print_ll();
 
   linkL.push_back(2);
+  cout << endl;
+  linkL.print_ll();
+
+  linkL.pop_back();
   cout << endl;
   linkL.print_ll();
 }
