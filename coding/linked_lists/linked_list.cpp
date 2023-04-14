@@ -30,6 +30,7 @@ public:
     int count = 0;
     for (current = head; current != nullptr; current = current->next) {
       if (count == index) {
+        cout << "Found at index " << index << ": " << current->value << endl;
         return current->value;
       }
       count++;
@@ -51,22 +52,40 @@ public:
     }
   }
 
-  void print_ll() {
-    while (head != nullptr) {
-      std::cout << head->value << std::endl;
+  void pop_front() {
+    if (head != nullptr) {
+      Node *tmp = head;
       head = head->next;
+      delete tmp;
+      size--;
     }
+  }
+
+  void print_ll() {
+    Node *tmp = head;
+    while (tmp != nullptr) {
+      std::cout << tmp->value << std::endl;
+      tmp = tmp->next;
+    }
+    delete tmp;
   }
 };
 
 int main() {
   LinkedList linkL;
   linkL.get_size();
+
   linkL.is_empty();
+
   linkL.push_front(1);
   linkL.push_front(3);
   linkL.push_front(5);
   linkL.push_front(7);
   linkL.value_at(2);
+  linkL.print_ll();
+
+  cout << "Size: " << linkL.get_size() << endl;
+
+  linkL.pop_front();
   linkL.print_ll();
 }
