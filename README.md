@@ -641,10 +641,10 @@ if you can identify the runtime complexity of different algorithms. It's a super
         - [x] push_front(value) - adds an item to the front of the list
         - [x] pop_front() - remove front item and return its value
         - [x] push_back(value) - adds an item at the end
-        - [ ] pop_back() - removes end item and returns its value
-        - [ ] front() - get value of front item
-        - [ ] back() - get value of end item
-        - [ ] insert(index, value) - insert value at index, so current item at that index is pointed to by new item at index
+        - [x] pop_back() - removes end item and returns its value
+        - [x] front() - get value of front item
+        - [x] back() - get value of end item
+        - [x] insert(index, value) - insert value at index, so current item at that index is pointed to by new item at index
         - [ ] erase(index) - removes node at given index
         - [ ] value_n_from_end(n) - returns the value of the node at nth position from the end of the list
         - [ ] reverse() - reverses the list
