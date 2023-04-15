@@ -9,7 +9,8 @@ struct Node {
 };
 
 // Only int values to keep it simple. For a multiple values types LinkedList use
-// templates.
+// templates. Also, it's better to use a tail pointer to optimize a lot of the
+// funtions.
 class LinkedList {
   Node *head;
   int size;
@@ -116,12 +117,9 @@ public:
       throw out_of_range("Empty linked list.");
     }
     Node *current;
-    for (current = head; current != nullptr; current = current->next) {
-      if (current->next == nullptr) {
-        return current->value;
-      }
+    for (current = head; current->next != nullptr; current = current->next) {
     }
-    return 1;
+    return current->value;
   }
 
   void print_ll() {
