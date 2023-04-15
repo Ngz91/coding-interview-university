@@ -122,6 +122,33 @@ public:
     return current->value;
   }
 
+  void insert(int index, int value) {
+    if (head == nullptr) {
+      throw out_of_range("Empty linked list.");
+    } else if (index > size - 1) {
+      throw out_of_range("Index out of range.");
+    }
+
+    Node *n = new Node();
+    n->value = value;
+    n->next = nullptr;
+
+    if (size == 1) {
+      n->next = head;
+      head = n;
+      return;
+    }
+
+    Node *current;
+    current = head;
+    for (int i = 0; i < index - 1; i++) {
+      current = current->next;
+    }
+    n->next = current->next;
+    current->next = n;
+    size++;
+  }
+
   void print_ll() {
     Node *tmp = head;
     while (tmp != nullptr) {
@@ -160,4 +187,9 @@ int main() {
 
   cout << endl;
   cout << "Front: " << linkL.front() << " Back: " << linkL.back() << endl;
+
+  cout << endl;
+  linkL.insert(2, 9);
+
+  linkL.print_ll();
 }
