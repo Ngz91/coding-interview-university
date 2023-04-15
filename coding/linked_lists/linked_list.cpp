@@ -27,18 +27,20 @@ public:
     return false;
   }
 
-  // TODO Test
   int value_at(int index) {
-    Node *current;
+    if (head == nullptr || size - 1 < index) {
+      throw out_of_range("Out of range");
+    }
+
+    Node *current = head;
     int count = 0;
-    for (current = head; current != nullptr; current = current->next) {
-      if (count == index) {
-        cout << "Found at index " << index << ": " << current->value << endl;
-        return current->value;
-      }
+
+    while (current != nullptr && count != index) {
+      current = current->next;
       count++;
     }
-    return 0;
+    cout << "Found at index " << index << ": " << current->value << endl;
+    return current->value;
   }
 
   void push_front(int value) {
@@ -123,10 +125,8 @@ public:
   }
 
   void insert(int index, int value) {
-    if (head == nullptr) {
+    if (head == nullptr || index > size - 1) {
       throw out_of_range("Empty linked list.");
-    } else if (index > size - 1) {
-      throw out_of_range("Index out of range.");
     }
 
     Node *n = new Node();
