@@ -1,4 +1,5 @@
 #include <iostream>
+#include <exception>
 
 using namespace std;
 
@@ -97,9 +98,30 @@ public:
     for (current = head; current != nullptr; current = current->next) {
       if (current->next->next == nullptr) {
         current->next = nullptr;
+        size--;
         return;
       }
     }
+  }
+
+  int front() {
+    if (head == nullptr) {
+      throw out_of_range("Empty linked list.");
+    }
+    return head->value;
+  }
+
+  int back() {
+    if (head == nullptr) {
+      throw out_of_range("Empty linked list.");
+    }
+    Node *current;
+    for (current = head; current != nullptr; current = current->next) {
+      if (current->next == nullptr) {
+        return current->value;
+      }
+    }
+    return 1;
   }
 
   void print_ll() {
@@ -137,4 +159,7 @@ int main() {
   linkL.pop_back();
   cout << endl;
   linkL.print_ll();
+
+  cout << endl;
+  cout << "Front: " << linkL.front() << " Back: " << linkL.back() << endl;
 }
