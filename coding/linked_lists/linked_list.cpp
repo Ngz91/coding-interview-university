@@ -6,6 +6,9 @@ using namespace std;
 struct Node {
   int value;
   Node *next;
+
+  // Unique pointer to test
+  std::unique_ptr<Node> unext;
 };
 
 // Only int values to keep it simple. For a multiple values types LinkedList use
@@ -14,6 +17,9 @@ struct Node {
 class LinkedList {
   Node *head;
   int size;
+
+  // Unique pointer to test
+  std::unique_ptr<Node> uhead;
 
 public:
   LinkedList() : head{nullptr}, size{0} {};
@@ -81,6 +87,29 @@ public:
     for (current = head; current != nullptr; current = current->next) {
       if (current->next == nullptr) {
         current->next = n;
+        size++;
+        return;
+      }
+    }
+  }
+
+  void unique_push_back(int value) {
+    // Function that uses smart pointer instead of normal pointer, implement
+    // after linked list is complete
+    std::unique_ptr<Node> n = std::make_unique<Node>();
+    n->value = value;
+    n->next = nullptr;
+
+    if (uhead == nullptr) {
+      uhead = std::move(n);
+      size++;
+      return;
+    }
+
+    Node *current;
+    for (current = uhead.get(); current != nullptr; current = current->next) {
+      if (current->unext == nullptr) {
+        current->unext = std::move(n);
         size++;
         return;
       }
