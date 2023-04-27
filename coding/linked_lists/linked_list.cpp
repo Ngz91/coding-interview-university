@@ -1,5 +1,6 @@
 #include <iostream>
 #include <exception>
+#include <memory>
 
 using namespace std;
 
@@ -93,7 +94,7 @@ public:
     }
   }
 
-  void unique_push_back(int value) {
+  /*void unique_push_back(int value) {
     // Function that uses smart pointer instead of normal pointer, implement
     // after linked list is complete
     std::unique_ptr<Node> n = std::make_unique<Node>();
@@ -114,7 +115,7 @@ public:
         return;
       }
     }
-  }
+  }*/
 
   void pop_back() {
     if (head == nullptr) {
@@ -178,6 +179,68 @@ public:
     size++;
   }
 
+  void erase(int index) {
+    if (head == nullptr || index > size - 1) {
+      throw out_of_range("Empty linked list");
+    } else if (index == size - 1) {
+      this->pop_back();
+      return;
+    } else if (size == 1 && index == 1) {
+      this->pop_front();
+      return;
+    }
+
+    Node *prev = new Node();
+    Node *current;
+    current = head;
+    for (int i = 0; i < index; i++) {
+      prev = current;
+      current = current->next;
+    }
+
+    prev->next = current->next;
+    delete current;
+    size--;
+  }
+
+  int value_n_from_end(int n) {
+    if (head == nullptr || n > size - 1) {
+      throw out_of_range("Empty linked list");
+    } else if (n == size) {
+      return front();
+    }
+    Node *current;
+    current = head;
+    for (int diff = (size - n) - 1; diff != 0; diff--) {
+      current = current->next;
+    }
+
+    return current->value;
+  }
+
+  void reverse() {
+    if (head == nullptr || size == 1) {
+      cout << "Empty linked list or size equal 1";
+      return;
+    }
+
+    Node *current = head;
+    Node *prev = nullptr;
+    Node *next = nullptr;
+
+    while (current != nullptr) {
+      next = current->next;
+      current->next = prev;
+      prev = current;
+      current = next;
+    }
+
+    head = prev;
+  }
+
+  // TODO
+  void remove_value(int n) {}
+
   void print_ll() {
     Node *tmp = head;
     while (tmp != nullptr) {
@@ -220,5 +283,24 @@ int main() {
   cout << endl;
   linkL.insert(2, 9);
 
+  linkL.print_ll();
+
+  cout << endl;
+  linkL.erase(1);
+
+  linkL.print_ll();
+  linkL.push_back(7);
+  linkL.push_back(6);
+
+  cout << endl;
+
+  linkL.print_ll();
+
+  cout << endl;
+  cout << linkL.value_n_from_end(3) << endl;
+
+  cout << endl;
+
+  linkL.reverse();
   linkL.print_ll();
 }
