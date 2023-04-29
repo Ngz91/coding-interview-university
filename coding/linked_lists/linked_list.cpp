@@ -238,8 +238,23 @@ public:
     head = prev;
   }
 
-  // TODO
-  void remove_value(int n) {}
+  void remove_value(int n) {
+    if (head == nullptr) {
+      throw out_of_range("Empty linked list");
+    }
+
+    Node *current = head;
+    Node *prev = nullptr;
+
+    while (current->value != n) {
+      prev = current;
+      current = current->next;
+    }
+
+    prev->next = current->next;
+    delete current;
+    size--;
+  }
 
   void print_ll() {
     Node *tmp = head;
@@ -300,7 +315,10 @@ int main() {
   cout << linkL.value_n_from_end(3) << endl;
 
   cout << endl;
-
-  linkL.reverse();
+ 
+  linkL.remove_value(1);
   linkL.print_ll();
+
+  //linkL.reverse();
+  //linkL.print_ll();
 }
